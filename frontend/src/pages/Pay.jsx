@@ -13,7 +13,7 @@ const Pay = () => {
 
             <div className="flex flex-col  items-center justify-center mt-4 px-2 py-2">
                  <h1 className='font-bold  text-xl '>Pay Here</h1>
-                <img className=' flex items-center justify-center mt-2 px-2 py-2 sm:w-[250px]' src={assets.pay} />
+                {/* <img className=' flex items-center justify-center mt-2 px-2 py-2 sm:w-[250px]' src={assets.pay} /> */}
             </div>
         </div>
     )

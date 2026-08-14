@@ -18,20 +18,14 @@ const port = process.env.PORT || 4000
 connectDB()
 connectCloudinary()
 
-
-
-app.get("/health", (req, res) => {
-    res.status(200).json({ status: "ok" });
-});
-
-
-
-
-// middlewares
-
+// middlewares — must be before all routes
 app.use(express.json())
 app.use(cors())   // allow frontend to connect it with backend
 
+// health check — no auth, no DB, lightweight
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 
 // api endpoints
 
@@ -43,12 +37,15 @@ app.use(cors())   // allow frontend to connect it with backend
  app.use('/api/user' , userRouter)
 
 
-
-
 app.get('/' , (req , res)=>{
     res.send('Api working good')
 })
 
+// global error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).json({ success: false, message: 'Internal server error' })
+})
 
 app.listen(port , ()=>{
     console.log("server started" , port);
